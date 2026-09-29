@@ -1,11 +1,16 @@
-from argparse import ArgumentParser
+# Imports 
 
+from argparse import ArgumentParser
+from loguru import logger
 from playwright.sync_api import sync_playwright
 
-from .scrape_books import scrape_books
+# Paths
+from .scrape_books import ScrapeBook
 
 
 def main():
+    logger.info("Start web scraping books project")
+
     parser = ArgumentParser(
         prog="scrape-books",
         description="Scrapes book data from https://books.toscrape.com/",
@@ -30,7 +35,8 @@ def main():
         browser = pw.chromium.launch(headless=False)
         ctx = browser.new_context()
         page = ctx.new_page()
-        books = scrape_books(page, category=args.category, max_books=args.max_books)
+        scrapper = ScrapeBook()
+        books: list = scrapper.scrape_books(page=page, category=args.category, max_books=args.max_books)
 
     for i, book in enumerate(books, start=1):
         print(
