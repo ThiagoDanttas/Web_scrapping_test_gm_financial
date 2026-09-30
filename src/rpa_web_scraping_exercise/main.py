@@ -1,14 +1,17 @@
-# Imports 
 
 from argparse import ArgumentParser
 from loguru import logger
 from playwright.sync_api import sync_playwright
 
-# Paths
+
 from .scrape_books import ScrapeBook
+from utils.logger import setup_logging
 
 
 def main():
+
+    setup_logging()
+
     logger.info("Start web scraping books project")
 
     parser = ArgumentParser(
@@ -45,7 +48,6 @@ def main():
         )
         print(f"   {book['url']}")
     print(f"\nScraped {len(books)} book(s).")
-
 
 if __name__ == "__main__":
     main()
