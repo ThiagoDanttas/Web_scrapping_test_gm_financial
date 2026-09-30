@@ -1,5 +1,4 @@
 
-
 def parser_rating(rating: str) -> int:
 
     match(rating):
@@ -15,8 +14,5 @@ def parser_rating(rating: str) -> int:
             return 5
         case _:
             return None
-        
-        
-
 
 
