@@ -1,4 +1,35 @@
-# RPA Web Scraping Exercise
+# RPA Web Scraping Exercise | ![GM Financial](https://www.gmfinancial.com.br/content/dam/gmf-sites/gmf-io/es-cl/inicio/imagenes/04_22_gmflogo-footer_icon.svg)
+
+Technical test for a **Junior RPA Development** position at GM Financial.
+
+### Objective 🎯
+
+Build an automation to extract book data from a website using web scraping techniques.
+
+### Framework
+
+[Playwright (Python)](https://playwright.dev/python/)
+
+### Dependencies 📚
+
+| Package | Description |
+|---------|-------------|
+| `uv` | Package manager |
+| `playwright` | Browser automation |
+| `greenlet` | Async support for Playwright |
+| `loguru` | Logging |
+| `pyee` | Event emitter |
+| `typing-extensions` | Type hints |
+| `argparse` | Command-line arguments |
+
+### Project Flowchart :arrows_clockwise:
+
+[Miro Board](https://miro.com/app/live-embed/uXjVHy-DN9o=/?embedMode=view_only_without_ui&moveToViewport=-5375,-292,7956,2534&embedId=394188049392)
+
+---
+---
+---
+---
 
 Welcome! This is a short programming exercise for candidates to a **junior RPA
 development** position.
