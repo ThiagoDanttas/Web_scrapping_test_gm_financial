@@ -27,7 +27,7 @@ def main():
         "-m",
         help="Maximum number of books to scrape. Defaults to 30.",
         type=int,
-        default=30,
+        default=1000,
     )
     args = parser.parse_args()
 

@@ -20,11 +20,13 @@ class ScrapeBook:
       contract:
 
       - `category` is `None`: scrape all books, following the pagination from
-        the homepage without navigating into any category.
+        the homepage without navigating into any category. ---OK
+
       - `category` matches a sidebar category (case-insensitive): scrape only
-        that category's books, following its pagination.
+        that category's books, following its pagination. --- OK
+
       - `category` does not match any sidebar category (or is empty /
-        whitespace-only): return an empty list.
+        whitespace-only): return an empty list. --- OK
 
       Stops as soon as `max_books` books have been collected and never request
       pages beyond the limit. If `max_books` is less than or equal to zero, an
@@ -41,9 +43,7 @@ class ScrapeBook:
 
       
       book_list: list[BookData] = [] 
-      
-
-
+    
       # Start web (Health Check)
       try:
         response = page.goto(self.url_base, timeout=10000)
@@ -52,11 +52,11 @@ class ScrapeBook:
           logger.success(f"Success connection - status code:{response.status}")
           
         else:
-          logger.warning(f"Failed connection - status code:{response.status}, body:{response.body()}")
+          logger.error(f"Failed connection - status code:{response.status}, body:{response.body()}")
           return
         
       except Exception as e:
-          logger.warning(f"Failed connection - {e}")
+          logger.error(f"Failed connection - {e}")
 
       # Category list 
       categories: list[str] = page.locator("div.side_categories").all_inner_texts()
@@ -64,11 +64,22 @@ class ScrapeBook:
       categories: list[str] = categories[0].split(",")
       categories: list[str] = [categorie.lower() for categorie in categories]
 
+
+      # Validations 
+
+      if category is not None and not category.strip():
+        logger.warning(f"Invalid category: {category}")
+        return []   
+
+      if max_books <= 0:
+        logger.warning(f"max_books must be > 0, got {max_books}")
+        return []   
+      
       
       if category is None:
         
         try:
-          url: str = "https://books.toscrape.com/catalogue/category/books_1/index.html"
+          url: str = f"{self.url_base}/catalogue/category/books_1/index.html"
           
           response = page.goto(url=url, wait_until="domcontentloaded")
 
@@ -76,15 +87,15 @@ class ScrapeBook:
             logger.success("Main page loaded successfully.")
 
           else:
-            logger.warning(f"Main page failed to load.")
+            logger.error(f"Main page failed to load.")
 
         except Exception as e:
-          logger.warning(f"Failed to load - {e}")
+          logger.error(f"Failed to load main page - {e}")
 
         
         next_page = page.locator("li.next a")
         
-        logger.info("Extracting all books")
+        logger.info("Extracting books")
 
         while True:   
           
@@ -109,6 +120,11 @@ class ScrapeBook:
               )
             )
 
+            if len(book_list) == max_books:
+              logger.info(f"Extracted {max_books} books ")
+              logger.success("Main page extraction complete")
+              return book_list
+
           if not next_page.is_visible():
             break  
 
@@ -116,17 +132,17 @@ class ScrapeBook:
           page.wait_for_load_state("domcontentloaded")
 
         if book_list:
-          logger.success("Extract books successfully")
+          logger.success(f"Successfully extracted {category.title()} books")
           return book_list
         
-        logger.warning("Extract books failed: No books found")
+        logger.warning(f"Failed to extract books: no books found")
         return []
       
       else:
 
         if category.lower() in categories:
 
-          logger.success(f"Category {category.lower()} in category list")
+          logger.success(f"Category {category.title()} in category list")
           
           category_index = categories.index(category.lower())
           url: str = f'{self.url_base}/catalogue/category/books/{category.lower() + "_" + str(category_index + 1)}/index.html' 
@@ -139,30 +155,31 @@ class ScrapeBook:
               logger.success(f"{category.title()} page loaded successfully.")
 
             else:
-              logger.warning(f"{category.title()} page failed to load.")
+              logger.error(f"{category.title()} page failed to load.")
 
           except Exception as e:
-            logger.warning(f"Failed to load - {e}")
+            logger.error(f"Failed to load {category.title()} page - {e}")
 
           next_page = page.locator("li.next a")
 
-          
           if next_page.is_visible():
+
             logger.info(f"Extracting {category.title()} books")
-                      
+
             while True:   
                       
               articles: list = page.get_by_role('article').all()
 
               for article in articles:
-                        
+
                 rating: str = article.locator(".star-rating").get_attribute("class")
                 rating: str = parser_rating(str(rating.split()[-1]).lower())
                 book_title: str = article.locator('a[title]').get_attribute("title")
                 price: Decimal = Decimal(article.locator("p.price_color").inner_text().strip("£"))
                 in_stock: bool = str(article.locator(".availability").inner_text()).strip() == "In stock"
                 url: str = urljoin(page.url, article.locator("h3 a").get_attribute('href'))
-            
+
+
                 book_list.append(
                   BookData(
                     url=url, 
@@ -172,7 +189,13 @@ class ScrapeBook:
                     in_stock=in_stock
                   )
                 )
-            
+
+                if len(book_list) == max_books:
+                  logger.info(f"Extracted {max_books} books")
+                  logger.success(f"Successfully extracted {category.title()} books")
+                  return book_list
+
+                          
               if not next_page.is_visible():
                 break
                 
@@ -180,10 +203,10 @@ class ScrapeBook:
               page.wait_for_load_state("domcontentloaded")
 
             if book_list:
-              logger.success(f"Extract {category.title()} books successfully")
+              logger.success(f"Successfully extracted {category.title()} books")
               return book_list
-                    
-            logger.warning(f"Extract {category.title()} books failed: No books found")
+                 
+            logger.warning(f"Failed to extract {category.title()} books: no books found")
             return []
             
           else:
@@ -210,26 +233,18 @@ class ScrapeBook:
                 )
               )
 
+              if len(book_list) == max_books:
+                  logger.info(f"Extracted {max_books} books")
+                  logger.success(f"Successfully extracted {category.title()} books")
+                  return book_list
+
             if book_list:
-              logger.success(f"Extract {category.title()} books successfully")
+              logger.success(f"Successfully extracted {category.title()} books")
               return book_list
                                 
-            logger.warning(f"Extract {category.title()} books failed: No books found")
+            logger.warning(f"Failed to extract {category.title()} books: no books found")
             return []
           
-      logger.warning(f"Category {category} not in category list")
-      return []
-
-      
-
-
-
-
-      
-      
-
-
-      
-  
-
+        logger.warning(f"Category '{category}' not in category list")
+        return []
 
