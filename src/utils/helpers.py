@@ -1,4 +1,6 @@
+from playwright.sync_api import Page
 
+# Function to to parse a string -> int
 def parser_rating(rating: str) -> int:
 
     match(rating):
@@ -16,3 +18,10 @@ def parser_rating(rating: str) -> int:
             return None
 
 
+# Function to find the category of books
+def get_categories(page: Page) -> list:
+        categories: list[str] = page.locator("div.side_categories").all_inner_texts()
+        categories: list = [str(category).replace("\n", ",") for category in categories]
+        categories: list[str] = categories[0].split(",")
+        categories: list[str] = [category.lower() for category in categories]
+        return categories

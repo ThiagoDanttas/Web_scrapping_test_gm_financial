@@ -3,7 +3,7 @@ from playwright.sync_api import Page
 from loguru import logger
 from urllib.parse import urljoin
 
-from utils.helpers import parser_rating
+from utils.helpers import parser_rating, get_categories
 from utils.extraction import extract_datas_books
 from models.book_model import BookData
 
@@ -42,8 +42,6 @@ class ScrapeBook:
           A list of the scraped books.
       """
 
-      
-
     
       # Start web (Health Check)
       
@@ -60,13 +58,7 @@ class ScrapeBook:
       except Exception as e:
           logger.error(f"Failed connection - {e}")
 
-      # Category list 
-      categories: list[str] = page.locator("div.side_categories").all_inner_texts()
-      categories: list = [str(cat).replace("\n", ",") for cat in categories]
-      categories: list[str] = categories[0].split(",")
-      categories: list[str] = [categorie.lower() for categorie in categories]
-
-
+      
       # Validations 
 
       """
@@ -132,7 +124,9 @@ class ScrapeBook:
             that category's books, following its pagination.
         
         """
-        
+
+        categories = get_categories(page=page)
+
         if category.lower() in categories:
 
           logger.success(f"Category {category.title()} in category list")
