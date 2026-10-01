@@ -3,7 +3,7 @@ from playwright.sync_api import Page
 from loguru import logger
 from urllib.parse import urljoin
 
-from utils.helpers import parser_rating, get_categories
+from utils.helpers import parser_rating, get_categories, health_check
 from utils.extraction import extract_datas_books
 from models.book_model import BookData
 
@@ -12,7 +12,9 @@ from models.book_model import BookData
 class ScrapeBook:
 
   def __init__(self):
+    
     self.url_base: str = "https://books.toscrape.com"
+
 
   def scrape_books(self, page: Page, *, category: str | None, max_books: int) -> list[BookData]:
       """Scrape book data from https://books.toscrape.com/.
@@ -42,22 +44,17 @@ class ScrapeBook:
           A list of the scraped books.
       """
 
-    
+
       # Start web (Health Check)
+      web_health_check = health_check(page=page, url=self.url_base)
+
+      if web_health_check.ok :
+        logger.success(f"Success connection - status code:{web_health_check.status}")
+                  
+      else:
+        logger.error(f"Failed connection - status code:{web_health_check.status}, body:{web_health_check.body()}")
+        return []
       
-      try:
-        response = page.goto(self.url_base, timeout=10000)
-
-        if response.ok:
-          logger.success(f"Success connection - status code:{response.status}")
-          
-        else:
-          logger.error(f"Failed connection - status code:{response.status}, body:{response.body()}")
-          return
-        
-      except Exception as e:
-          logger.error(f"Failed connection - {e}")
-
       
       # Validations 
 
@@ -101,6 +98,7 @@ class ScrapeBook:
 
           else:
             logger.error(f"Main page failed to load.")
+            return []
 
         except Exception as e:
           logger.error(f"Failed to load main page - {e}")
@@ -143,6 +141,7 @@ class ScrapeBook:
 
             else:
               logger.error(f"{category.title()} page failed to load.")
+              return []
 
           except Exception as e:
             logger.error(f"Failed to load {category.title()} page - {e}")
