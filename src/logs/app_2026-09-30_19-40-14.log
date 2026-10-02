@@ -1,7 +1,0 @@
-2026-09-30 19:40:14.841 | INFO     | rpa_web_scraping_exercise.main:main:15 - Start web scraping books project
-2026-09-30 19:40:16.839 | SUCCESS  | rpa_web_scraping_exercise.scrape_books:scrape_books:52 - Success connection - status code:200
-2026-09-30 19:40:17.027 | SUCCESS  | rpa_web_scraping_exercise.scrape_books:scrape_books:100 - Main page loaded successfully.
-2026-09-30 19:40:17.027 | INFO     | rpa_web_scraping_exercise.scrape_books:scrape_books:109 - Extracting books
-2026-09-30 19:40:17.276 | INFO     | utils.extraction:extract_datas_books:42 - Extracted 10 books
-2026-09-30 19:40:17.276 | SUCCESS  | utils.extraction:extract_datas_books:43 - Books successfully extracted
-2026-09-30 19:40:17.276 | SUCCESS  | rpa_web_scraping_exercise.scrape_books:scrape_books:113 - All books extracted successfully

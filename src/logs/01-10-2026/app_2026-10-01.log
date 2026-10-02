@@ -1,0 +1,14 @@
+2026-10-01 22:04:55.581 | INFO     | rpa_web_scraping_exercise.main:main:15 - Start web scraping books project
+2026-10-01 22:04:57.818 | SUCCESS  | rpa_web_scraping_exercise.scrape_books:scrape_books:52 - Success connection - status code:200
+2026-10-01 22:04:57.837 | SUCCESS  | rpa_web_scraping_exercise.scrape_books:scrape_books:130 - Category Travel in category list
+2026-10-01 22:04:57.987 | SUCCESS  | rpa_web_scraping_exercise.scrape_books:scrape_books:140 - Travel page loaded successfully.
+2026-10-01 22:04:57.987 | INFO     | rpa_web_scraping_exercise.scrape_books:scrape_books:150 - Extracting Travel books
+2026-10-01 22:04:58.083 | INFO     | utils.extraction:extract_datas_books:42 - Extracted 10 books
+2026-10-01 22:04:58.084 | SUCCESS  | utils.extraction:extract_datas_books:43 - Books successfully extracted
+2026-10-01 22:04:58.084 | SUCCESS  | rpa_web_scraping_exercise.scrape_books:scrape_books:154 - Successfully extracted Travel books
+2026-10-01 22:05:15.124 | INFO     | rpa_web_scraping_exercise.main:main:15 - Start web scraping books project
+2026-10-01 22:05:16.831 | SUCCESS  | rpa_web_scraping_exercise.scrape_books:scrape_books:52 - Success connection - status code:200
+2026-10-01 22:05:16.851 | SUCCESS  | rpa_web_scraping_exercise.scrape_books:scrape_books:130 - Category Travel in category list
+2026-10-01 22:05:17.047 | SUCCESS  | rpa_web_scraping_exercise.scrape_books:scrape_books:140 - Travel page loaded successfully.
+2026-10-01 22:05:17.047 | INFO     | rpa_web_scraping_exercise.scrape_books:scrape_books:150 - Extracting Travel books
+2026-10-01 22:05:17.177 | SUCCESS  | rpa_web_scraping_exercise.scrape_books:scrape_books:154 - Successfully extracted Travel books

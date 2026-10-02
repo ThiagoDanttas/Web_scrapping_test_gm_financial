@@ -145,59 +145,18 @@ class ScrapeBook:
 
           except Exception as e:
             logger.error(f"Failed to load {category.title()} page - {e}")
-        
-          next_page = page.locator("li.next a")
-
-          if next_page.is_visible():
-
-            logger.info(f"Extracting {category.title()} books")
-            extraction: list[BookData] = extract_datas_books(page=page, max_books=max_books)
-
-            if extraction:
-              logger.success(f"Successfully extracted {category.title()} books")
-              return extraction
-                                      
-            logger.warning(f"Failed to extract books: no books found")
-            return []
             
-          else:
 
-            logger.info(f"Extracting {category.title()} books")
-            
-            articles: list = page.get_by_role('article').all()
-            book_list: list[BookData] = [] 
+          logger.info(f"Extracting {category.title()} books")
+          extraction: list[BookData] = extract_datas_books(page=page, max_books=max_books)
 
-            for article in articles:
+          if extraction:
+            logger.success(f"Successfully extracted {category.title()} books")
+            return extraction
                                     
-              rating: str = article.locator(".star-rating").get_attribute("class")
-              rating: str = parser_rating(str(rating.split()[-1]).lower())
-              book_title: str = article.locator('a[title]').get_attribute("title")
-              price: Decimal = Decimal(article.locator("p.price_color").inner_text().strip("£"))
-              in_stock: bool = str(article.locator(".availability").inner_text()).strip() == "In stock"
-              url: str = urljoin(page.url, article.locator("h3 a").get_attribute('href'))
-          
-              book_list.append(
-                BookData(
-                  url=url, 
-                  name=book_title, 
-                  rating=rating, 
-                  price=price, 
-                  in_stock=in_stock
-                )
-              )
-
-              if len(book_list) == max_books:
-                logger.info(f"Extrated {max_books} books")
-                logger.success(f"Successfully extracted {category.title()} books")
-                return book_list
-
-            if book_list:
-              logger.success(f"Successfully extracted {category.title()} books")
-              return book_list
-                                
-            logger.warning(f"Failed to extract {category.title()} books: no books found")
-            return []
-
+          logger.warning(f"Failed to extract books: no books found")
+          return []
+        
         """- `category` does not match any sidebar category """  
         logger.warning(f"Category '{category}' not in category list")
         return []
