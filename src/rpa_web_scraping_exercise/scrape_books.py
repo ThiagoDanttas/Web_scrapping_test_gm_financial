@@ -1,9 +1,8 @@
-from decimal import Decimal
 from playwright.sync_api import Page
 from loguru import logger
-from urllib.parse import urljoin
 
-from utils.helpers import parser_rating, get_categories, health_check
+
+from utils.helpers import get_categories, health_check
 from utils.extraction import extract_datas_books
 from models.book_model import BookData
 
@@ -87,7 +86,8 @@ class ScrapeBook:
 
       """
       if category is None:
-        
+
+         
         try:
           url: str = f"{self.url_base}/catalogue/category/books_1/index.html"
           
@@ -131,7 +131,7 @@ class ScrapeBook:
           
           category_index = categories.index(category.lower())
           url: str = f'{self.url_base}/catalogue/category/books/{category.lower() + "_" + str(category_index + 1)}/index.html' 
-
+          
           try:
             
             response = page.goto(url=url, wait_until="domcontentloaded")

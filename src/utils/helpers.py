@@ -6,13 +6,10 @@ from loguru import logger
 def health_check(page: Page, url) -> Response:
 
     try:
-        response = page.goto(url=url, timeout=10000)
-
+        return page.goto(url=url, timeout=10000)
+            
     except Exception as e:
         logger.error(f"Failed connection - {e}")
-
-    return response
-
 
 # Function to find the category of books
 def get_categories(page: Page) -> list:
