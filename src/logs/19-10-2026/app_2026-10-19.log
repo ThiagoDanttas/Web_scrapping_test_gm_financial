@@ -1,0 +1,34 @@
+2026-10-19 15:13:19.708 | INFO     | rpa_web_scraping_exercise.main:main:15 - Start web scraping books project
+2026-10-19 15:14:10.722 | INFO     | rpa_web_scraping_exercise.main:main:15 - Start web scraping books project
+2026-10-19 15:14:33.904 | INFO     | rpa_web_scraping_exercise.main:main:15 - Start web scraping books project
+2026-10-19 15:14:55.942 | INFO     | rpa_web_scraping_exercise.main:main:15 - Start web scraping books project
+2026-10-19 15:14:58.633 | SUCCESS  | rpa_web_scraping_exercise.scrape_books:scrape_books:51 - Success connection - status code:200
+2026-10-19 15:14:58.660 | SUCCESS  | rpa_web_scraping_exercise.scrape_books:scrape_books:130 - Category Science Fiction in category list
+2026-10-19 15:14:58.826 | ERROR    | rpa_web_scraping_exercise.scrape_books:scrape_books:143 - Science Fiction page failed to load.
+2026-10-19 15:38:24.761 | INFO     | rpa_web_scraping_exercise.main:main:15 - Start web scraping books project
+2026-10-19 15:38:26.670 | SUCCESS  | rpa_web_scraping_exercise.scrape_books:scrape_books:51 - Success connection - status code:200
+2026-10-19 15:38:26.696 | SUCCESS  | rpa_web_scraping_exercise.scrape_books:scrape_books:130 - Category Science Fiction in category list
+2026-10-19 15:38:26.862 | ERROR    | rpa_web_scraping_exercise.scrape_books:scrape_books:143 - Science Fiction page failed to load. - <bound method Response.body of <Response url='https://books.toscrape.com/catalogue/category/books/science%20fiction_16/index.html' request=<Request url='https://books.toscrape.com/catalogue/category/books/science%20fiction_16/index.html' method='GET'>>>
+2026-10-19 15:40:14.170 | INFO     | rpa_web_scraping_exercise.main:main:15 - Start web scraping books project
+2026-10-19 15:40:15.958 | SUCCESS  | rpa_web_scraping_exercise.scrape_books:scrape_books:51 - Success connection - status code:200
+2026-10-19 15:40:15.980 | SUCCESS  | rpa_web_scraping_exercise.scrape_books:scrape_books:130 - Category Science Fiction in category list
+2026-10-19 15:41:15.579 | INFO     | rpa_web_scraping_exercise.main:main:15 - Start web scraping books project
+2026-10-19 15:41:17.401 | SUCCESS  | rpa_web_scraping_exercise.scrape_books:scrape_books:51 - Success connection - status code:200
+2026-10-19 15:41:17.447 | SUCCESS  | rpa_web_scraping_exercise.scrape_books:scrape_books:130 - Category Science Fiction in category list
+2026-10-19 15:41:17.591 | ERROR    | rpa_web_scraping_exercise.scrape_books:scrape_books:143 - Science Fiction page failed to load. - <bound method Response.body of <Response url='https://books.toscrape.com/catalogue/category/books/-s-c-i-e-n-c-e-%20-f-i-c-t-i-o-n-_16/index.html' request=<Request url='https://books.toscrape.com/catalogue/category/books/-s-c-i-e-n-c-e-%20-f-i-c-t-i-o-n-_16/index.html' method='GET'>>>
+2026-10-19 15:44:30.591 | INFO     | rpa_web_scraping_exercise.main:main:15 - Start web scraping books project
+2026-10-19 15:44:32.378 | SUCCESS  | rpa_web_scraping_exercise.scrape_books:scrape_books:51 - Success connection - status code:200
+2026-10-19 15:44:32.412 | SUCCESS  | rpa_web_scraping_exercise.scrape_books:scrape_books:130 - Category Science Fiction in category list
+2026-10-19 15:44:32.559 | ERROR    | rpa_web_scraping_exercise.scrape_books:scrape_books:143 - Science Fiction page failed to load. - <bound method Response.body of <Response url='https://books.toscrape.com/catalogue/category/books/-s-c-i-e-n-c-e-%20-f-i-c-t-i-o-n-_16/index.html' request=<Request url='https://books.toscrape.com/catalogue/category/books/-s-c-i-e-n-c-e-%20-f-i-c-t-i-o-n-_16/index.html' method='GET'>>>
+2026-10-19 15:59:06.255 | INFO     | rpa_web_scraping_exercise.main:main:15 - Start web scraping books project
+2026-10-19 15:59:08.540 | SUCCESS  | rpa_web_scraping_exercise.scrape_books:scrape_books:51 - Success connection - status code:200
+2026-10-19 15:59:08.560 | SUCCESS  | rpa_web_scraping_exercise.scrape_books:scrape_books:130 - Category Science Fiction in category list
+2026-10-19 15:59:08.747 | SUCCESS  | rpa_web_scraping_exercise.scrape_books:scrape_books:140 - Science Fiction page loaded successfully.
+2026-10-19 15:59:08.747 | INFO     | rpa_web_scraping_exercise.scrape_books:scrape_books:150 - Extracting Science Fiction books
+2026-10-19 15:59:09.087 | SUCCESS  | rpa_web_scraping_exercise.scrape_books:scrape_books:154 - Successfully extracted Science Fiction books
+2026-10-19 15:59:24.418 | INFO     | rpa_web_scraping_exercise.main:main:15 - Start web scraping books project
+2026-10-19 15:59:26.233 | SUCCESS  | rpa_web_scraping_exercise.scrape_books:scrape_books:51 - Success connection - status code:200
+2026-10-19 15:59:26.255 | SUCCESS  | rpa_web_scraping_exercise.scrape_books:scrape_books:130 - Category Travel in category list
+2026-10-19 15:59:26.410 | SUCCESS  | rpa_web_scraping_exercise.scrape_books:scrape_books:140 - Travel page loaded successfully.
+2026-10-19 15:59:26.410 | INFO     | rpa_web_scraping_exercise.scrape_books:scrape_books:150 - Extracting Travel books
+2026-10-19 15:59:26.579 | SUCCESS  | rpa_web_scraping_exercise.scrape_books:scrape_books:154 - Successfully extracted Travel books

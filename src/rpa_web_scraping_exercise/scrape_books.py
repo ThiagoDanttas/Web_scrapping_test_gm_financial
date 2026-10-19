@@ -130,7 +130,7 @@ class ScrapeBook:
           logger.success(f"Category {category.title()} in category list")
           
           category_index = categories.index(category.lower())
-          url: str = f'{self.url_base}/catalogue/category/books/{category.lower() + "_" + str(category_index + 1)}/index.html' 
+          url: str = f'{self.url_base}/catalogue/category/books/{"-".join(category.lower().split(" ")) + "_" + str(category_index + 1)}/index.html' 
           
           try:
             
@@ -140,7 +140,7 @@ class ScrapeBook:
               logger.success(f"{category.title()} page loaded successfully.")
 
             else:
-              logger.error(f"{category.title()} page failed to load.")
+              logger.error(f"{category.title()} page failed to load. - {response.body}")
               return []
 
           except Exception as e:
